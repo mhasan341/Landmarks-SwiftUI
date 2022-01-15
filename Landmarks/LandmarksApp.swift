@@ -22,7 +22,7 @@ struct LandmarksApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LandmarkList()
+            ContentView()
                 .environmentObject(modelData)
         }.onChange(of: scenePhase) { newValue in
             print(newValue)
