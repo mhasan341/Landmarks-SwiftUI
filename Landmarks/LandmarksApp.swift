@@ -9,23 +9,22 @@ import SwiftUI
 
 @main
 struct LandmarksApp: App {
-    
-    @Environment(\.scenePhase) private var scenePhase
+
     @StateObject private var modelData = ModelData()
-    
-    @UIApplicationDelegateAdaptor(SwiftUIAppDelegate.self) private var delegate
-    
-    init(){
-        print("Init")
-        
-    }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(modelData)
-        }.onChange(of: scenePhase) { newValue in
-            print(newValue)
         }
+        .commands {
+            LandmarkCommands()
+        }
+
+#if os(macOS)
+        Settings {
+            LandmarkSettings()
+        }
+#endif
     }
 }
